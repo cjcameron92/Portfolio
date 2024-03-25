@@ -1,113 +1,128 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+
+const languages = [
+  "Java",
+  "C++",
+  "GoLang",
+  "Kotlin",
+  "Python",
+  "Javascript",
+  "C#",
+  "Typescript",
+];
+const services = [
+  "Azure",
+  "SQL",
+  "MongoDB",
+  "Redis",
+  "Data Anyaltics",
+  "Excel",
+  "RabbitMQ",
+  "Word",
+];
+
+const experience = [
+  {
+    title: "Lead Software Engineer",
+    date: "09/01/2022 --- present",
+    company: "Docere Health",
+    location: "Toronto, Ontario",
+    description:
+      "Starting as an intern at Docere Health in 2022, I quickly progressed to a full-stack developer role, where I was instrumental in designing the MVP. My success led to a permanent position, through which I ascended to lead a team tasked with further developing the healthcare platform. In this leadership role, I not only guide the platform's design but also mentor the next wave of talent. My experience at Docere, enriched by our Microsoft partnership, has honed my skills in both teamwork and project leadership.",
+  },
+  {
+    title: "Software Engineer",
+    date: "04/01/2021 --- 09/01/2022",
+    company: "Stellar Development",
+    location: "North Carolina",
+    description:
+      "In collaboration with stakeholders, I enhanced the Minecraft gaming experience by integrating blockchain technology. I led the design of a robust ecosystem to accommodate a thriving community of thousands of players, focusing on creating a seamless, engaging environment. My role included architecting a resilient backend infrastructure to support the complex needs of this dynamic online world.",
+  },
+  {
+    title: "Chief Executive Officer",
+    date: "08/01/2019 - 12/31/2020",
+    company: "Vertmix Inc.",
+    location: "Waterloo, Ontario",
+    description:
+      "I founded Vertmix Inc., a bespoke software development firm catering to global small businesses, specializing in Java and Kotlin. Embracing agile methodologies, we've earned the trust of over 30 clients worldwide. Leading a dedicated team of six developers, we've consistently delivered high-quality software solutions, underpinned by a SCRUM-based project management framework, ensuring client satisfaction and timely delivery.",
+  },
+];
 
 export default function Home() {
+  const [currentExperience, setCurrentExperience] = useState(0);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col lg:flex-row ">
+      {/* Sidebar for Languages - becomes a top bar on smaller screens */}
+      <div className="lg:fixed lg:left-0 w-full lg:w-[200px] rounded-t-lg lg:rounded-[5px] mt-4 lg:mt-16 flex flex-row lg:flex-col items-center lg:justify-start space-x-2 lg:space-x-0 space-y-0 lg:space-y-4 p-2 lg:p-4 overflow-auto">
+        {languages.map((item, i) => (
+          <h2
+            key={i}
+            className={`ml-2 lg:ml-8 sm:mr-2 lg:mr-8 block text-black p-2 text-base lg:text-lg transition-colors duration-300 ease-in-out hover:bg-yellow-300 hover:rounded-[5px] whitespace-nowrap `}
+            style={{ width: "auto", maxWidth: "160px" }}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            {item}
+          </h2>
+        ))}
+      </div>
+
+      {/* Main Content - Adjusts padding to account for sidebars on larger screens */}
+      <div className="flex-grow p-4 lg:p-8 text-center">
+        <h1 className="text-xl font-bold">Work Experience</h1>
+        <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-32 mt-8">
+          <div>
+            <h2 className="text-lg font-medium">
+              {experience[currentExperience].title}
+            </h2>
+            <h3>{experience[currentExperience].date}</h3>
+          </div>
+          <div>
+            <h2 className="text-lg font-medium">
+              {experience[currentExperience].company}
+            </h2>
+            <h3>{experience[currentExperience].location}</h3>
+          </div>
+        </div>
+        {/* Background and Text Styling Applied Here */}
+
+        <div className="mt-8 mb-16 lg:mb-8 bg-black text-white p-4 rounded-lg max-w-4xl mx-auto">
+          <p className="text-base lg:text-lg leading-relaxed">
+            {experience[currentExperience].description}
+          </p>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      {/* Buttons for changing experience */}
+      <div className="fixed bottom-12 md:bottom-8 left-0 right-0 px-4">
+        <div className="flex justify-center space-x-2 md:space-x-4 mb-10">
+          {experience.map((item, index) => (
+            <button
+              key={index}
+              aria-label={`Select experience ${index + 1}`}
+              className={`w-6 h-6 md:w-6 md:h-6 rounded-full cursor-pointer transition-all duration-300 
+              ${
+                index === currentExperience
+                  ? "bg-blue-600 border-4 border-blue-300 shadow-lg"
+                  : "bg-black"
+              } 
+        hover:bg-gray-500 hover:shadow-md`}
+              onClick={() => setCurrentExperience(index)}
+            ></button>
+          ))}
+        </div>
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
+      <div className="lg:fixed lg:right-0 w-full lg:w-[200px] rounded-b-lg lg:rounded-[5px] mt-4 lg:mt-16 flex flex-row lg:flex-col items-center lg:justify-start space-x-2 lg:space-x-0 space-y-0 lg:space-y-4 p-2 lg:p-4 overflow-auto">
+        {services.map((item, i) => (
+          <h2
+            key={i}
+            className={`block text-black p-2 text-base lg:text-lg transition-colors duration-300 ease-in-out hover:bg-yellow-300 hover:rounded-[5px] whitespace-nowrap `}
+            style={{ width: "auto", maxWidth: "160px" }}
+          >
+            {item}
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        ))}
       </div>
-    </main>
+    </div>
   );
 }
